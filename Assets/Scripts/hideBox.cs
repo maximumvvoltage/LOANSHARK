@@ -21,8 +21,7 @@ public class hideBox : MonoBehaviour
         }
         else
         {
-            inRange = false;
-            
+            inRange = false;           
         }
     }
 

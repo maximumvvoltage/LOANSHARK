@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public bool canHide;
     public bool isHiding;
     public bool canMove;
+    public bool crouched;
 
     public float movementSpeed = 5f;
 
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         canMove = true;
+        crouched = false;
     }
 
     void Update()
@@ -29,6 +31,25 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        if (crouched == false & Input.GetKeyDown(KeyCode.LeftShift))
+        {     
+            if (crouched == false)
+            {
+                crouched = true;
+                movementSpeed = 2f;
+            }            
+        }
+
+        if (crouched = true & Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if (crouched == true)
+            {
+                crouched = false;
+                movementSpeed = 5f;
+            }            
+            Debug.Log("Player is no longer hiding");
+        }
 
         if (canHide == true & Input.GetKeyDown(KeyCode.F))
         {     
