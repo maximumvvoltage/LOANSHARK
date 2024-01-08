@@ -9,10 +9,18 @@ public class Movement : MonoBehaviour
     private Vector2 lastMoveDirection;
     public Rigidbody2D rb;    
     Animator myAnim;
+    public GameObject player;
+
+    public bool canHide;
+    public bool isHiding;
+    public bool canMove;
+    public bool crouched;
 
     // Start is called before the first frame update
     void Start()
     {
+        canMove = true;
+        crouched = false;
         myAnim = GetComponent<Animator>();
     }
 
@@ -21,11 +29,61 @@ public class Movement : MonoBehaviour
     {
         ProcessInputs();
         Animate();
+
+        if (crouched == false & Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (crouched == false)
+            {
+                crouched = true;
+                speed = 1f;
+            }
+        }
+
+        if (crouched = true & Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if (crouched == true)
+            {
+                crouched = false;
+                speed = 3f;
+            }
+            Debug.Log("Player is no longer hiding");
+        }
+
+        if (canHide == true & Input.GetKeyDown(KeyCode.F))
+        {
+            if (isHiding == false)
+            {
+                isHiding = true;
+                Debug.Log("Player is hiding");
+                canMove = false;
+
+                player.GetComponent<Renderer>().enabled = false;
+            }
+
+        }
+
+        if (isHiding = true & Input.GetKeyUp(KeyCode.F))
+        {
+            if (isHiding == true)
+            {
+                isHiding = false;
+                canMove = true;
+                player.GetComponent<Renderer>().enabled = true;
+            }
+            Debug.Log("Player is no longer hiding");
+        }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = input * speed;
+        if (canMove)
+        {
+            rb.velocity = input * speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     void ProcessInputs()
@@ -51,5 +109,20 @@ public class Movement : MonoBehaviour
         myAnim.SetFloat("MoveMagnitude", input.magnitude);
         myAnim.SetFloat("LastMoveX", lastMoveDirection.x);
         myAnim.SetFloat("LastMoveY", lastMoveDirection.y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Hiding Spot")
+        {
+            canHide = true;
+            Debug.Log("Player can hide");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collex)
+    {
+        canHide = false;
+        Debug.Log("Player can not hide");
     }
 }
