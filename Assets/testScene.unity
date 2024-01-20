@@ -809,6 +809,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
+  rb: {fileID: 0}
+  player: {fileID: 0}
+  canHide: 0
+  isHiding: 0
+  canMove: 0
+  crouched: 0
 --- !u!1 &1220566183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,7 +1197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759a4af36a45a8d4dbc1693eeb637b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingTime: 0
+  darkness: {fileID: 0}
   countdownText: {fileID: 726481261}
+  sCountdown: {fileID: 0}
+  HideCanvas: {fileID: 0}
+  SeekCanvas: {fileID: 0}
 --- !u!1 &1459340478
 GameObject:
   m_ObjectHideFlags: 0
