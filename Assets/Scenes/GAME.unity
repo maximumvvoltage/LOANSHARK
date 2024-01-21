@@ -179,6 +179,10 @@ MonoBehaviour:
   HideObject: {fileID: 419779944}
   SeekObject: {fileID: 1840597833}
   darkness: {fileID: 1741885148}
+  startDialogue: {fileID: 389993117}
+  halfTime: {fileID: 887333994}
+  loseDialogue: {fileID: 1340461173}
+  winDialogue: {fileID: 2147030024}
   HideText: {fileID: 419779945}
   SeekText: {fileID: 1840597836}
 --- !u!1 &41035087
@@ -8661,6 +8665,10 @@ MonoBehaviour:
   HideObject: {fileID: 419779944}
   SeekObject: {fileID: 1840597833}
   darkness: {fileID: 1741885148}
+  startDialogue: {fileID: 0}
+  halfTime: {fileID: 0}
+  loseDialogue: {fileID: 0}
+  winDialogue: {fileID: 0}
   HideText: {fileID: 419779945}
   SeekText: {fileID: 1840597836}
 --- !u!1 &423873737
@@ -17320,6 +17328,10 @@ MonoBehaviour:
   HideObject: {fileID: 0}
   SeekObject: {fileID: 0}
   darkness: {fileID: 1741885148}
+  startDialogue: {fileID: 0}
+  halfTime: {fileID: 0}
+  loseDialogue: {fileID: 0}
+  winDialogue: {fileID: 0}
   HideText: {fileID: 0}
   SeekText: {fileID: 0}
 --- !u!114 &1711980760

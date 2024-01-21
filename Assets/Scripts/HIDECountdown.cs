@@ -8,10 +8,19 @@ public class HIDECountdown : MonoBehaviour
     //float seekingStartTime;
     public float hidingStartTime = 30f;
     public float seekingStartTime = 190.1f;
+
+    [Header("GameObjects")]
     public GameObject HideObject;
     public GameObject SeekObject;
-    
     public GameObject darkness;
+
+    [Header("Dialogue Boxes")]
+    public GameObject startDialogue;
+    public GameObject halfTime;
+    public GameObject loseDialogue;
+    public GameObject winDialogue;
+
+    [Header("Text Objects")]
     public Text HideText;
     public Text SeekText;
 
@@ -45,14 +54,6 @@ public class HIDECountdown : MonoBehaviour
             darkness.SetActive(true);
             SeekObject.SetActive(true);
         }
-        if (hidingStartTime <= -2)
-        {
-            //startDialogue.SetActive(true);
-        }
-        if (hidingStartTime <= -5)
-        {
-            //startDialogue.SetActive(false);
-        }
     }
 
     public void SeekTime()
@@ -67,9 +68,27 @@ public class HIDECountdown : MonoBehaviour
             SeekText.color = Color.green;
         }
 
+        if (seekingStartTime <= 117)
+        {
+            startDialogue.SetActive(true);
+            if (seekingStartTime <= 115)
+            {
+                startDialogue.SetActive(false);
+            }    
+        }
+        if (seekingStartTime <= 30)
+        {
+            halfTime.SetActive(true);
+            if (seekingStartTime <= 27)
+            {
+                halfTime.SetActive(false);
+            }
+        }
+        
         if (seekingStartTime <= 0)
         {
             seekingStartTime = 0;
+            winDialogue.SetActive(true);
         }
     }
 }

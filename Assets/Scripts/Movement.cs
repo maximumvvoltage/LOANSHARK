@@ -147,7 +147,7 @@ public class Movement : MonoBehaviour
         }
         if (crouched)
         {
-            Noise += 0.005f;
+            Noise += 0.01f;
             NoiseBar.fillAmount = Noise / MaxNoise;
             if (Noise > 100)
             {
