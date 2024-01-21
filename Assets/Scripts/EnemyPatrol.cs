@@ -6,7 +6,7 @@ public class EnemyPatrol : MonoBehaviour
 {
 //    public Transform[] ttrolPoints;
     public int currentWaypointIndex = 0;
-    private float speed = 3f;
+    //private float speed = 3f;
 
     public GameObject pointD;
     public GameObject pointC;
@@ -57,6 +57,7 @@ public class EnemyPatrol : MonoBehaviour
             mafiaRB.velocity = new Vector2(x = 0, y = 2);
             currentPoint = pointD.transform;
             mafiaAnim.Play("walkUp");
+            //flashlightD(SetActive);
      
         }
         if(Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointD.transform)

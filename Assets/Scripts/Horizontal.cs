@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrolHorizontal : MonoBehaviour
+public class Horizontal : MonoBehaviour
 {
     public GameObject pointC;
     public GameObject pointD;
