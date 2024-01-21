@@ -13,6 +13,9 @@ public class HIDECountdown : MonoBehaviour
     public GameObject HideObject;
     public GameObject SeekObject;
     public GameObject darkness;
+    public GameObject Triad1;
+    public GameObject Triad2;
+    public GameObject Triad3;
 
     [Header("Dialogue Boxes")]
     public GameObject DieDialogue;
@@ -92,6 +95,9 @@ public class HIDECountdown : MonoBehaviour
         if (seekingStartTime <= 129)
         {
             startDialogue.SetActive(true);
+            Triad1.SetActive(true);
+            Triad2.SetActive(true);
+            Triad3.SetActive(true);
             if (seekingStartTime <= 124)
             {
                 startDialogue.SetActive(false);
