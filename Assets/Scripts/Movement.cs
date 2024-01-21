@@ -124,7 +124,7 @@ public class Movement : MonoBehaviour
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         
-        if ((input.x != 0 || input.y != 0) && !crouched)
+        if ((input.x != 0 || input.y != 0))
         {
             ismoving = true;
         }
@@ -136,7 +136,7 @@ public class Movement : MonoBehaviour
         // if the player iz not at velocity zero but also not crouched, (aka, walking freely)
         // noise will increase in proportion to speed. necessary for determining how much noise you're generating.
         // Noise will never exceed more than its maximum.
-        if (ismoving && !crouched)
+        if (ismoving)
         {
             Noise += 0.01f;
             NoiseBar.fillAmount = Noise / MaxNoise;
@@ -144,6 +144,15 @@ public class Movement : MonoBehaviour
             {
                 Noise = 100;
             } 
+        }
+        if (crouched)
+        {
+            Noise += 0.005f;
+            NoiseBar.fillAmount = Noise / MaxNoise;
+            if (Noise > 100)
+            {
+                Noise = 100;
+            }
         }
 
         // Ensures that the diagonal movements are not twice as fast as the linear movements.

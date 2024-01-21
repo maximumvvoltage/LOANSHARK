@@ -5,52 +5,71 @@ using UnityEngine.UI;
 
 public class HIDECountdown : MonoBehaviour
 {
-    float currentTime = 0f;
-    public float startingTime;
+    //float seekingStartTime;
+    public float hidingStartTime = 30f;
+    public float seekingStartTime = 190.1f;
+    public GameObject HideObject;
+    public GameObject SeekObject;
+    
     public GameObject darkness;
     public Text HideText;
     public Text SeekText;
-    //public SEEKCountdown sCountdown;
-    public GameObject startDialogue;
-    //public Canvas HideCanvas;
-    //public Canvas SeekCanvas;
+
     void Start()
     {
-        currentTime = startingTime;
+        HideObject.SetActive(true);
         darkness.SetActive(false);
-        //GetComponent<AudioSource>(Hiding).Play();
-        //SeekCanvas.GetComponent<Canvas>().enabled = false;
+        SeekObject.SetActive(false);
     }
 
     void Update()
     {
         HideTime();
+        SeekTime();
     }
 
     void HideTime()
     {
-        currentTime -= 1 * Time.deltaTime;
-        print(currentTime);
-        HideText.text = currentTime.ToString("0");
+        hidingStartTime -= 1 * Time.deltaTime;
+        print(hidingStartTime);
+        HideText.text = hidingStartTime.ToString("0");
 
-        if (currentTime <= 5)
+        if (hidingStartTime <= 5)
         {
-            countdownText.color = Color.red;
+            HideText.color = Color.red;
         }
 
-        if (currentTime <= 0)
+        if (hidingStartTime <= 0)
         {
-            HideText.SetActive(false);
+            HideObject.SetActive(false);
             darkness.SetActive(true);
+            SeekObject.SetActive(true);
         }
-        if (currentTime <= -2)
+        if (hidingStartTime <= -2)
         {
-            startDialogue.SetActive(true);
+            //startDialogue.SetActive(true);
         }
-        if (currentTime <= -5)
+        if (hidingStartTime <= -5)
         {
-            startDialogue.SetActive(false);
-            SeekText.SetActive(true);
+            //startDialogue.SetActive(false);
+        }
+    }
+
+    public void SeekTime()
+    {
+        seekingStartTime -= 1 * Time.deltaTime;
+        print(seekingStartTime);
+        SeekText.text = seekingStartTime.ToString("0");
+        SeekText.color = Color.red;
+
+        if (seekingStartTime <= 15)
+        {
+            SeekText.color = Color.green;
+        }
+
+        if (seekingStartTime <= 0)
+        {
+            seekingStartTime = 0;
         }
     }
 }
