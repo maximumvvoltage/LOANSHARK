@@ -7,7 +7,7 @@ public class SEEKCountdown : MonoBehaviour
 {
 
     float currentTime = 0f;
-    public float startingTime = 125.1f;
+    public float startingTime = 190.1f;
     public GameObject Canvas;
     public Text countdownText;
     public HIDECountdown hCountdown;
@@ -29,7 +29,7 @@ public class SEEKCountdown : MonoBehaviour
         countdownText.text = currentTime.ToString("0");
         countdownText.color = Color.red;
 
-        if (currentTime <= 10)
+        if (currentTime <= 15)
         {
             countdownText.color = Color.green;
         }
@@ -37,7 +37,6 @@ public class SEEKCountdown : MonoBehaviour
         if (currentTime <= 0)
         {
             currentTime = 0;
-            print("Nothing. Look on the next floor.");
         }
     }
 }

@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     // if Wei can move or not.
     public bool canMove;
     // if Wei is currently moving or not.
-    public bool moving;
+    public bool ismoving;
 
     // if Wei is walking slow. I typed it in as 'crouched' because I previously had the idea for a seperate crouching
     // animation, but decided against it. No one crawls around the floor when they're trying to sneak around.
@@ -44,7 +44,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         canMove = true;
-        crouched = false;
         myAnim = GetComponent<Animator>();
     }
 
@@ -55,37 +54,19 @@ public class Movement : MonoBehaviour
         Animate();
 
         // If you're not crouching and you hold Left Shift, crouched becomes true, and your speed slows significantly.
-        if (crouched == false & Input.GetKeyDown(KeyCode.LeftShift))
+        if (crouched == false && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (crouched == false)
-            {
-                crouched = true;
-                speed = 1f;
-            }
+            crouched = true;
+            speed = 1f;
         }
 
         // If you're currently crouched and you let go of Left Shift, your speed returns to normal.
         if (crouched = true & Input.GetKeyUp(KeyCode.LeftShift))
         {
-            if (crouched == true)
-            {
-                crouched = false;
-                speed = 3f;
-            }
+            //crouched = false;
+            speed = 3f;
         }
 
-        // if the player iz not at velocity zero but also not crouched, (aka, walking freely)
-        // noise will increase in proportion to speed. necessary for determining how much noise you're generating.
-        // Noise will never exceed more than its maximum.
-        if (moving && !crouched)
-        {
-            Noise += 1f;
-            NoiseBar.fillAmount = Noise / MaxNoise;
-            if (Noise > 100)
-            {
-                Noise = 100;
-            } 
-        }
         // If it's possible to hide and you press down "F" while not currently hiding, you will disappear into a box,
         // and lose the ability to move. 
         if (canHide == true & Input.GetKeyDown(KeyCode.F))
@@ -143,6 +124,28 @@ public class Movement : MonoBehaviour
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
         
+        if ((input.x != 0 || input.y != 0) && !crouched)
+        {
+            ismoving = true;
+        }
+        else
+        {
+            ismoving = false;
+        }
+
+        // if the player iz not at velocity zero but also not crouched, (aka, walking freely)
+        // noise will increase in proportion to speed. necessary for determining how much noise you're generating.
+        // Noise will never exceed more than its maximum.
+        if (ismoving && !crouched)
+        {
+            Noise += 0.01f;
+            NoiseBar.fillAmount = Noise / MaxNoise;
+            if (Noise > 100)
+            {
+                Noise = 100;
+            } 
+        }
+
         // Ensures that the diagonal movements are not twice as fast as the linear movements.
         input.Normalize();
     }    
@@ -175,10 +178,7 @@ public class Movement : MonoBehaviour
             Debug.Log("HEY!!!!!");
             //and then you lose
         }
-        else
-        {
-            Debug.Log("Anxiety heightening.");
-        }   
+           
     }
 
     private void OnTriggerExit2D(Collider2D collex)
